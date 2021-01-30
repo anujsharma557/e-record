@@ -1,7 +1,7 @@
 package com.et.model;
 
 /**
- * @auther-anuj sharma
+ * @auther : anuj sharma
  */
 public class Product {
     private long id;
