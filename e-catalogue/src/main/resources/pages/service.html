@@ -21,14 +21,39 @@
 </head>
 
 <body>
-<button type="button" id="fetchBtn"
-        class="btn btn-primary">
-    Fetch Data
-</button>
 
 <div class="container">
-    <h1>Ecommerce App</h1>
-    <ul id="list"></ul>
+    <h1>E-Commerce App</h1>
+</div>
+
+<div align="center">
+    <form id="ProductInput">
+        <label for="productId">Product Id:</label><br>
+        <input type="text" id="productId" name="productId"><br>
+        <label for="productType">productType:</label>
+        <select name="productType" id="productType">
+            <option value="mobile">Mobile</option>
+            <option value="tshirt">T-Shirt</option>
+            <option value="headSet">Head Set</option>
+        </select><br>
+        <label for="productBrand">Product Brand:</label>
+        <select name="productBrand" id="productBrand">
+            <option value="Samsung">Samsung</option>
+            <option value="boat">Boat</option>
+            <option value="headSet">Van Heusen</option>
+        </select>
+        <br>
+        <label for="mrp">MRP:</label><br>
+        <input type="text" id="mrp" name="mrp"><br>
+        <label for="discount">Discount % :</label><br>
+        <input type="text" id="discount" name="discount"><br>
+    </form>
+</div>
+<div align="center">
+<button type="button" id="fetchBtn"
+        class="btn btn-primary">
+    Submit
+</button>
 </div>
 
 <!-- Optional JavaScript -->
@@ -40,6 +65,11 @@
     fetchBtn.addEventListener("click", buttonclickhandler);
 
     function buttonclickhandler() {
+        var productId=document.getElementById('ProductInput').elements['productId'].value;
+        var productType=document.getElementById('ProductInput').elements['productType'].value;
+        var productBrand=document.getElementById('ProductInput').elements['productBrand'].value;
+        var mrp=document.getElementById('ProductInput').elements['mrp'].value;
+        var discount=document.getElementById('ProductInput').elements['discount'].value;
 
         // Instantiate an new XHR Object
         const xhr = new XMLHttpRequest();
@@ -47,16 +77,16 @@
         // Open an obejct (GET/POST, PATH,
         // ASYN-TRUE/FALSE)
         xhr.open("GET",
-            "http://localhost:8080/addProduct", true);
+            "http://localhost:8080/addProduct"+"?productId="+productId+"&productType="+productType+"&productBrand="+productBrand+"&mrp="+mrp+"&discount="+discount, true);
 
         // When response is ready
         xhr.onload = function () {
             if (this.status === 200) {
+                console.log(xhr.responseText);
                 alert('success');
             }
             else {
                 alert('Failure');
-                console.log("File not found");
             }
         }
         xhr.send();
