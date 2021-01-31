@@ -17,8 +17,8 @@ public class EComController {
      * @return
      */
     @RequestMapping("/addProduct")
-    public long addProduct(){
-        return 100L;
+    public void addProduct(){
+        System.out.println("getProduct call");
     }
 
     /**
