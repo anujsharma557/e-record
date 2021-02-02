@@ -7,10 +7,10 @@ import org.springframework.context.annotation.Configuration;
 /**
  * @author: Anuj Sharma
  **/
-    @Configuration
+    //@Configuration
     public class BeanConfig {
 
-        @Bean
+        //@Bean
         public UserService userService() {
             return new UserService();
         }

@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.UUID;
+
 /**
  * @author: Anuj Sharma
  */
@@ -54,9 +56,9 @@ public class EComController {
     @RequestMapping("/registerSeller")
     public void registerSeller(@RequestParam String firstName, @RequestParam String middleName,@RequestParam String lastName,
                                   @RequestParam String phone,@RequestParam String email, @RequestParam String password){
-        userService.registerSeller(firstName,middleName,lastName,
+        UUID uuid=userService.registerSeller(firstName,middleName,lastName,
                phone,email,password);
-        String res="registerSeller call-"+firstName+":"+middleName+":"+lastName+":"+phone+":"+email+":"+password;
+        String res="registerSeller call-"+firstName+":"+middleName+":"+lastName+":"+phone+":"+email+":"+password+"UUID:"+uuid;
         System.out.println(res);
 
     }
