@@ -1,29 +1,16 @@
 package com.et.model;
 
 /**
- * @auther : anuj sharma
- */
-public class Product {
-    private long id;
-    private String name;
-    public Product(long id,String name){
-        this.id=id;
-        this.name=name;
-    }
+ * @author: Anuj Sharma
+ **/
+public interface Product {
 
-    public long getId() {
-        return id;
-    }
+    void productId();
+    void ProductType();
+    void ProductBrand();
+    void ProductMrp();
+    void ProductDiscount();
 
-    public void setId(long id) {
-        this.id = id;
-    }
 
-    public String getName() {
-        return name;
-    }
 
-    public void setName(String name) {
-        this.name = name;
-    }
 }

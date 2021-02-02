@@ -1,6 +1,6 @@
 package com.et.controllers;
 
-import com.et.model.Product;
+import com.et.model.ProductDetail;
 import com.et.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -45,7 +45,7 @@ public class EComController {
      * @return
      */
     @RequestMapping("/getProduct")
-    public Product getProduct(){
+    public ProductDetail getProduct(){
         return null;
     }
 
@@ -58,7 +58,7 @@ public class EComController {
                                   @RequestParam String phone,@RequestParam String email, @RequestParam String password){
         UUID uuid=userService.registerSeller(firstName,middleName,lastName,
                phone,email,password);
-        String res="registerSeller call-"+firstName+":"+middleName+":"+lastName+":"+phone+":"+email+":"+password+"UUID:"+uuid;
+        String res="getDetails-"+userService.getUserDetail(uuid);
         System.out.println(res);
 
     }

@@ -7,10 +7,13 @@ import java.util.UUID;
  **/
 public interface User {
 
-    UUID addUser();
+    UUID addUser(String firstName, String middleName, String lastName,
+                 String phone, String email, String password);
 
-    String removeUser();
+    String removeUser(UUID uuid);
 
-    String updateUserDetail();
+    String updateUserDetail(UUID uuid);
+    String getUserDetail(UUID uuid);
+
 
 }
