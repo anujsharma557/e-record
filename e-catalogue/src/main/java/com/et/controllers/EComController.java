@@ -1,19 +1,23 @@
 package com.et.controllers;
 
 import com.et.model.Product;
+import com.et.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.sql.Connection;
 
 /**
  * @author: Anuj Sharma
  */
 @RestController
 public class EComController {
+
+    @Autowired
+    UserService userService;
+
     private static final Logger log= LoggerFactory.getLogger(EComController.class);
     /**
      * method returns product Id
@@ -50,6 +54,8 @@ public class EComController {
     @RequestMapping("/registerSeller")
     public void registerSeller(@RequestParam String firstName, @RequestParam String middleName,@RequestParam String lastName,
                                   @RequestParam String phone,@RequestParam String email, @RequestParam String password){
+        userService.registerSeller(firstName,middleName,lastName,
+               phone,email,password);
         String res="registerSeller call-"+firstName+":"+middleName+":"+lastName+":"+phone+":"+email+":"+password;
         System.out.println(res);
 
