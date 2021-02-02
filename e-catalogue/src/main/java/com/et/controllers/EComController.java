@@ -1,7 +1,6 @@
 package com.et.controllers;
 
 import com.et.model.Product;
-import com.et.utility.ConnectionUtility;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,7 +22,6 @@ public class EComController {
     @RequestMapping("/addProduct")
     public long addProduct(@RequestParam long productId, @RequestParam String productType,@RequestParam String productBrand,@RequestParam float mrp,@RequestParam String discount){
         String res="getProduct call-"+productId+":"+productType+":"+productBrand+":"+mrp+":"+discount;
-
         return productId;
     }
 
