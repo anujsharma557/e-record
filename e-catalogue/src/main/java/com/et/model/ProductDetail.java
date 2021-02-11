@@ -5,10 +5,16 @@ package com.et.model;
  */
 public class ProductDetail {
     private long id;
-    private String name;
-    public ProductDetail(long id, String name){
+    private String type;
+    private String brand;
+    private float mRP;
+    private String discount;
+    public ProductDetail(long id, String type,String brand,float mRP,String discount){
         this.id=id;
-        this.name=name;
+        this.type=type;
+        this.brand=brand;
+        this.mRP=mRP;
+        this.discount=discount;
     }
 
     public long getId() {
@@ -19,16 +25,40 @@ public class ProductDetail {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getType() {
+        return type;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
+
+    public float getmRP() {
+        return mRP;
+    }
+
+    public void setmRP(float mRP) {
+        this.mRP = mRP;
+    }
+
+    public String getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(String discount) {
+        this.discount = discount;
     }
 
     @Override
     public String toString() {
-        return "id:"+id+" name:"+name;
+        return "id:"+id+" type:"+type+" brand:"+brand+" MRP:"+mRP+" discount:"+discount;
     }
 }

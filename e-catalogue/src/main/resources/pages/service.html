@@ -28,8 +28,6 @@
 
 <div align="center">
     <form id="ProductInput">
-        <label for="productId">Product Id:</label><br>
-        <input type="text" id="productId" name="productId"><br>
         <label for="productType">productType:</label>
         <select name="productType" id="productType">
             <option value="mobile">Mobile</option>
@@ -50,7 +48,7 @@
     </form>
 </div>
 <div align="center">
-<button type="button" id="fetchBtn"
+<button type="button" id="addProduct"
         class="btn btn-primary">
     Submit
 </button>
@@ -60,12 +58,12 @@
 <!-- jQuery first, then Popper.js,
      then Bootstrap JS -->
 <script>
-    let fetchBtn = document.getElementById("fetchBtn");
+    let addProduct = document.getElementById("addProduct");
 
-    fetchBtn.addEventListener("click", buttonclickhandler);
+    addProduct.addEventListener("click", buttonclickhandler);
 
     function buttonclickhandler() {
-        var productId=document.getElementById('ProductInput').elements['productId'].value;
+        <!--var productId=document.getElementById('ProductInput').elements['productId'].value;-->
         var productType=document.getElementById('ProductInput').elements['productType'].value;
         var productBrand=document.getElementById('ProductInput').elements['productBrand'].value;
         var mrp=document.getElementById('ProductInput').elements['mrp'].value;
@@ -73,17 +71,14 @@
 
         // Instantiate an new XHR Object
         const xhr = new XMLHttpRequest();
-
-        // Open an obejct (GET/POST, PATH,
-        // ASYN-TRUE/FALSE)
         xhr.open("GET",
-            "http://localhost:8080/addProduct"+"?productId="+productId+"&productType="+productType+"&productBrand="+productBrand+"&mrp="+mrp+"&discount="+discount, true);
+            "http://localhost:8080/addProduct"+"?productType="+productType+"&productBrand="+productBrand+"&mrp="+mrp+"&discount="+discount, true);
 
         // When response is ready
         xhr.onload = function () {
             if (this.status === 200) {
                 console.log(xhr.responseText);
-                alert('success');
+                alert('Added product Id: '+xhr.responseText);
             }
             else {
                 alert('Failure');
