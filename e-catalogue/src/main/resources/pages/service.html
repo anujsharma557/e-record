@@ -54,6 +54,22 @@
 </button>
 </div>
 
+<button type="button" id="fetchProduct"
+        class="btn btn-primary">
+    Fetch
+</button>
+</div>
+<div>
+    <table id="productTable" style="width:70%" border="2">
+        <tr>
+            <td colspan="25">Type</td>
+            <td colspan="25">Brand</td>
+            <td colspan="25">MRP</td>
+            <td colspan="25">Discount</td>
+        </tr>
+    </table>
+</div>
+
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js,
      then Bootstrap JS -->
@@ -86,6 +102,45 @@
         }
         xhr.send();
     }
+</script>
+<script>
+    <!-- script to fetch product list -->
+    let fetchProduct = document.getElementById("fetchProduct");
+    fetchProduct.addEventListener("click", fetch);
+    var response="";
+    function fetch() {
+
+        // Instantiate an new XHR Object
+        const xhr = new XMLHttpRequest();
+        xhr.open("GET",
+            "http://localhost:8080/getProduct", true);
+
+        // When response is ready
+        xhr.onload = function () {
+            if (this.status === 200) {
+                response=$.parseJSON(xhr.responseText);
+                alert(response);
+                var table=document.getElementById("productTable");
+                response.forEach(function(object){
+                    var tr = document.createElement('tr');
+                    tr.innerHTML = '<td colspan="25">' + object.type + '</td>' +
+                        '<td colspan="25">' + object.brand + '</td>' +
+                        '<td colspan="25">' + object.mrp + '</td>' +
+                        '<td colspan="25">' + object.discount + '</td>';
+                    table.appendChild(tr);
+                });
+
+                alert('response'+response);
+            }
+            else {
+                alert('Failure');
+            }
+        }
+        xhr.send();
+    }
+
+
+
 </script>
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"

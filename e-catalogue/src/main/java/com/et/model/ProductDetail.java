@@ -7,13 +7,13 @@ public class ProductDetail {
     private long id;
     private String type;
     private String brand;
-    private float mRP;
+    private float mrp;
     private String discount;
     public ProductDetail(long id, String type,String brand,float mRP,String discount){
         this.id=id;
         this.type=type;
         this.brand=brand;
-        this.mRP=mRP;
+        this.mrp =mRP;
         this.discount=discount;
     }
 
@@ -41,12 +41,12 @@ public class ProductDetail {
         this.brand = brand;
     }
 
-    public float getmRP() {
-        return mRP;
+    public float getMrp() {
+        return mrp;
     }
 
-    public void setmRP(float mRP) {
-        this.mRP = mRP;
+    public void setMrp(float mrp) {
+        this.mrp = mrp;
     }
 
     public String getDiscount() {
@@ -59,6 +59,6 @@ public class ProductDetail {
 
     @Override
     public String toString() {
-        return "id:"+id+" type:"+type+" brand:"+brand+" MRP:"+mRP+" discount:"+discount;
+        return "id:"+id+" type:"+type+" brand:"+brand+" MRP:"+ mrp +" discount:"+discount;
     }
 }
