@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body{
+            font-family: Calibri, Helvetica, sans-serif;
+            background-color: pink;
+        }
+        .container {
+            padding: 50px;
+            background-color: lightblue;
+        }
+
+        input[type=text], input[type=password], textarea {
+            width: 100%;
+            padding: 15px;
+            margin: 5px 0 22px 0;
+            display: inline-block;
+            border: none;
+            background: #f1f1f1;
+        }
+        input[type=text]:focus, input[type=password]:focus {
+            background-color: orange;
+            outline: none;
+        }
+        div {
+            padding: 10px 0;
+        }
+        hr {
+            border: 1px solid #f1f1f1;
+            margin-bottom: 25px;
+        }
+        .registerbtn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 16px 20px;
+            margin: 8px 0;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            opacity: 0.9;
+        }
+        .registerbtn:hover {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+<form id="registrationform">
+    <div class="container">
+        <center>  <h1>E-Terrain Registeration Form</h1> </center>
+        <hr>
+        <label> Firstname </label>
+        <input type="text" id="firstname" name="firstname" placeholder= "Firstname" size="15" required />
+        <label> Middlename: </label>
+        <input type="text" id="middlename"  name="middlename" placeholder="Middlename" size="15" required />
+        <label> Lastname: </label>
+        <input type="text"  id="lastname"  name="lastname" placeholder="Lastname" size="15"required />
+
+        <label>
+            Phone :
+        </label>
+        <input type="text" id="code" name="country code" placeholder="Country Code"  value="+91" size="2"/>
+        <input type="text" id="phone" name="phone" placeholder="phone no." size="10" required>
+
+        <label for="email"><b>Email</b></label>
+        <input type="text" id="email" placeholder="Enter Email" name="email" required>
+
+        <label for="psw"><b>Password</b></label>
+        <input type="password" id="password" placeholder="Enter Password" name="psw" required>
+
+        <label for="psw-repeat"><b>Re-type Password</b></label>
+        <input type="password" id="reTypePassword" placeholder="Retype Password" name="psw-repeat" required>
+        <button type="submit" id="registrationButton" class="registerbtn">Register</button>
+</form>
+<script>
+    let registrationButton = document.getElementById("registrationButton");
+
+    registrationButton.addEventListener("click", buttonclickhandler);
+
+    function buttonclickhandler() {
+        var firstName=document.getElementById('registrationform').elements['firstname'].value;
+        var middleName=document.getElementById('registrationform').elements['middlename'].value;
+        var lastName=document.getElementById('registrationform').elements['lastname'].value;
+        var phone=document.getElementById('registrationform').elements['phone'].value;
+        var email=document.getElementById('registrationform').elements['email'].value;
+        var password=document.getElementById('registrationform').elements['password'].value;
+        var reTypePassword=document.getElementById('registrationform').elements['reTypePassword'].value;
+
+        // Instantiate an new XHR Object
+        const xhr = new XMLHttpRequest();
+
+        xhr.open("GET",
+            "http://localhost:8080/registerSeller"+"?firstName="+firstName+"&middleName="+middleName+"&lastName="+lastName+"&phone="+phone+"&email="+email+"&password="+password, true);
+
+        // When response is ready
+        xhr.onload = function () {
+            if (this.status === 200) {
+                console.log(xhr.responseText);
+                alert('success');
+            }
+            else {
+                alert('Failure');
+            }
+        }
+        xhr.send();
+    }
+</script>
+</body>
+</html>

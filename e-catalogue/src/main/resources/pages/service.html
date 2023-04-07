@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,
+            initial-scale=1, shrink-to-fit=no" />
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href=
+            "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity=
+                  "sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous" />
+
+    <title>
+        e-terrain
+    </title>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>E-Commerce App</h1>
+</div>
+
+<div align="center">
+    <form id="ProductInput">
+        <label for="productType">productType:</label>
+        <select name="productType" id="productType">
+            <option value="mobile">Mobile</option>
+            <option value="tshirt">T-Shirt</option>
+            <option value="headSet">Head Set</option>
+        </select><br>
+        <label for="productBrand">Product Brand:</label>
+        <select name="productBrand" id="productBrand">
+            <option value="Samsung">Samsung</option>
+            <option value="boat">Boat</option>
+            <option value="headSet">Van Heusen</option>
+        </select>
+        <br>
+        <label for="mrp">MRP:</label><br>
+        <input type="text" id="mrp" name="mrp"><br>
+        <label for="discount">Discount % :</label><br>
+        <input type="text" id="discount" name="discount"><br>
+    </form>
+</div>
+<div align="center">
+<button type="button" id="addProduct"
+        class="btn btn-primary">
+    Submit
+</button>
+</div>
+
+<button type="button" id="fetchProduct"
+        class="btn btn-primary">
+    Fetch
+</button>
+</div>
+<div>
+    <table id="productTable" style="width:70%" border="2">
+        <tr>
+            <td colspan="25">Type</td>
+            <td colspan="25">Brand</td>
+            <td colspan="25">MRP</td>
+            <td colspan="25">Discount</td>
+        </tr>
+    </table>
+</div>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js,
+     then Bootstrap JS -->
+<script>
+    let addProduct = document.getElementById("addProduct");
+
+    addProduct.addEventListener("click", buttonclickhandler);
+
+    function buttonclickhandler() {
+        <!--var productId=document.getElementById('ProductInput').elements['productId'].value;-->
+        var productType=document.getElementById('ProductInput').elements['productType'].value;
+        var productBrand=document.getElementById('ProductInput').elements['productBrand'].value;
+        var mrp=document.getElementById('ProductInput').elements['mrp'].value;
+        var discount=document.getElementById('ProductInput').elements['discount'].value;
+
+        // Instantiate an new XHR Object
+        const xhr = new XMLHttpRequest();
+        xhr.open("GET",
+            "http://localhost:8080/addProduct"+"?productType="+productType+"&productBrand="+productBrand+"&mrp="+mrp+"&discount="+discount, true);
+
+        // When response is ready
+        xhr.onload = function () {
+            if (this.status === 200) {
+                console.log(xhr.responseText);
+                alert('Added product Id: '+xhr.responseText);
+            }
+            else {
+                alert('Failure');
+            }
+        }
+        xhr.send();
+    }
+</script>
+<script>
+    <!-- script to fetch product list -->
+    let fetchProduct = document.getElementById("fetchProduct");
+    fetchProduct.addEventListener("click", fetch);
+    var response="";
+    function fetch() {
+
+        // Instantiate an new XHR Object
+        const xhr = new XMLHttpRequest();
+        xhr.open("GET",
+            "http://localhost:8080/getProduct", true);
+
+        // When response is ready
+        xhr.onload = function () {
+            if (this.status === 200) {
+                response=$.parseJSON(xhr.responseText);
+                alert(response);
+                var table=document.getElementById("productTable");
+                response.forEach(function(object){
+                    var tr = document.createElement('tr');
+                    tr.innerHTML = '<td colspan="25">' + object.type + '</td>' +
+                        '<td colspan="25">' + object.brand + '</td>' +
+                        '<td colspan="25">' + object.mrp + '</td>' +
+                        '<td colspan="25">' + object.discount + '</td>';
+                    table.appendChild(tr);
+                });
+
+                alert('response'+response);
+            }
+            else {
+                alert('Failure');
+            }
+        }
+        xhr.send();
+    }
+
+
+
+</script>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity=
+                "sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous">
+</script>
+
+<script src=
+                "https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity=
+                "sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous">
+</script>
+
+<script src=
+                "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity=
+                "sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous">
+</script>
+</body>
+
+</html>
